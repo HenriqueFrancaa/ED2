@@ -8,9 +8,10 @@ public class App{
         Random gerador = new Random();
         while(i < 10){
             i++;
-            arv.insert(gerador.nextInt());
+            arv.insert(i+i);
         }
         arv.buscarMaiorValor();
         arv.buscaMenorValor();
+        arv.search(80);
     }
 }
