@@ -49,7 +49,7 @@ public class ABB{
         }
     }
 
-    public void insert2(Integer value){
+    public void insert2(Integer value){ //QUESTAO 3 da lista
         ABBNode aux,novo,aux2; // aux2 -> aponta para o pai e o aux -> para o filho
         novo = new ABBNode(value);
         int result;
@@ -89,7 +89,7 @@ public class ABB{
     }
 
 
-    private ABBNode buscar(Integer value){
+    private ABBNode buscar(Integer value){ //QUESTÃO 1 DA LISTA
         ABBNode aux;
         int result;
         if(this.raiz == null){
@@ -124,7 +124,7 @@ public class ABB{
 
     }
 
-    public void search(Integer value){
+    public void search(Integer value){ //QUESTÃO 2 da lista;
         ABBNode node = buscar(value);
         if(node == null){
             System.out.println("Valor não encontrado!");
@@ -134,7 +134,8 @@ public class ABB{
         }
     }
 
-    private ABBNode menorValor(){ //preciso passar algo como parametro para essa função?? e para achar o maior também?
+    private ABBNode menorValor(){ // QUESTÃO 4 letra a) da lista 
+        //preciso passar algo como parametro para essa função?? e para achar o maior também?
         ABBNode aux;
         aux = this.raiz;
         if(aux == null){
@@ -153,7 +154,7 @@ public class ABB{
         }
     }
 
-    private ABBNode maiorValor(){
+    private ABBNode maiorValor(){ //QUESTÃO 4 letra b) da lista
         ABBNode aux;
         aux = this.raiz;
         if(aux == null){
@@ -172,39 +173,29 @@ public class ABB{
         }
     }
 
+    public void buscaMenorValor(){//QUESTÃO 4 letra c) da lista
+        ABBNode node;
+        node = menorValor();
+        if(node == null){
+            System.out.println("A árvore está vázia!");
+        }
+        else{
+            System.out.println("o menor valor encontrado foi " + node.getinfo());
+        }
+    }
+
+    public void buscarMaiorValor(){// QUESTÃO 4 letra d) da lista
+        ABBNode node;
+        node = maiorValor();
+        if(node == null){
+            System.out.println("A árvore está vázia!");
+        }
+        else{
+            System.out.println("O maior valor encontrado foi " + node.getinfo());
+        }
+    }
+
     
 
 }
 
-class ABBNode{ //referencia para um objeto
-    private ABBNode esq;
-    private Integer info;
-    private ABBNode dir;
-    /*
-     
-     */
-    ABBNode (Integer value){
-        this.info = value;
-    }
-    Integer getinfo(){
-        return this.info;
-    }
-    void setinfo(Integer value){
-        this.info = value;
-    }
-    ABBNode getEsq(){
-        return this.esq;
-    }
-    void setEsq(ABBNode novoEsq){
-        this.esq = novoEsq;
-    }
-    ABBNode getDir(){
-        return this.dir;
-    }
-    void setDir(ABBNode novoDir){
-        this.dir = novoDir;
-    }
-
-
-    
-}
