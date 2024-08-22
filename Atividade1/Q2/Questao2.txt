@@ -1,0 +1,46 @@
+package Q2;
+
+private ABBNode buscar(Integer value){ //QUESTÃO 1 DA LISTA
+    ABBNode aux;
+    int result;
+    if(this.raiz == null){
+        System.out.println("Árvore vazia!");
+        return null;
+    }
+    else{
+        aux = this.raiz;
+        while(true){
+            result = value.compareTo(aux.getinfo());
+            if(result == 0){
+                return aux;
+            }
+            else if(result < 0){
+                if(aux.getEsq() != null){
+                    aux = aux.getEsq();
+                }
+                else{
+                    return null;
+                }
+            }
+            else{
+                if(aux.getDir() != null){
+                    aux = aux.getDir();
+                }
+                else{
+                    return null;
+                }
+            }
+        }
+    }
+
+}
+
+public void search(Integer value){ //QUESTÃO 2 da lista;
+    ABBNode node = buscar(value);
+    if(node == null){
+        System.out.println("Valor não encontrado!");
+    }
+    else{
+        System.out.println("Valor encontrado!");
+    }
+}

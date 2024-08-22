@@ -1,0 +1,41 @@
+package Q3;
+
+
+public void insert2(Integer value){ //QUESTAO 3 da lista
+    ABBNode aux,novo,aux2; // aux2 -> aponta para o pai e o aux -> para o filho
+    novo = new ABBNode(value);
+    int result;
+    aux = aux2 = this.raiz;
+    if(this.raiz == null){
+        this.raiz = novo;
+    }
+    else{
+        while(true){
+            result = value.compareTo(aux.getinfo());
+            if(result == 0){
+                System.out.println("Valor repetido!");
+            }
+            else if(result < 0){
+                aux2 = aux;
+                if(aux.getEsq() != null){
+                    aux = aux.getEsq();
+                }
+                else{
+                    aux.setEsq(novo);
+                    return;    
+                }
+            }
+            else{
+                aux2 = aux;
+                if(aux.getDir() != null){
+                    aux.getDir();
+                }
+                else{
+                    aux.setDir(novo);
+                    return;
+                }
+            }
+        }
+    }
+
+}

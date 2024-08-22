@@ -1,0 +1,32 @@
+package Q4;
+
+private ABBNode menorValor(){ // QUESTÃO 4 letra a) da lista 
+    ABBNode aux;
+    aux = this.raiz;
+    if(aux == null){
+        System.out.println("A árvore está vázia!");
+        return null;
+    }
+    else{
+        while(true){
+            if(aux.getEsq() != null){
+                aux = aux.getEsq();
+            }
+            else{
+                return aux;
+            }
+        }
+    }
+}
+
+public void buscaMenorValor(){//QUESTÃO 4 letra c) da lista
+        ABBNode node;
+        node = menorValor();
+        if(node == null){
+            System.out.println("A árvore está vázia!");
+        }
+        else{
+            System.out.println("o menor valor encontrado foi " + node.getinfo());
+        }
+        
+}

@@ -1,0 +1,22 @@
+package Q4;
+
+private ABBNode maiorValor(){ //QUESTÃO 4 letra b) da lista
+    ABBNode aux;
+    aux = this.raiz;
+    if(aux == null){
+        System.out.println("A árvore está vázia!");
+        return null;
+    }
+    else{
+        while(true){
+            if(aux.getDir() != null){
+                aux = aux.getDir();
+            }
+            else{
+                return aux;
+            }
+        }
+    }
+}
+
+

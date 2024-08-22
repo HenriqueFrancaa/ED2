@@ -135,7 +135,6 @@ public class ABB{
     }
 
     private ABBNode menorValor(){ // QUESTÃO 4 letra a) da lista 
-        //preciso passar algo como parametro para essa função?? e para achar o maior também?
         ABBNode aux;
         aux = this.raiz;
         if(aux == null){
