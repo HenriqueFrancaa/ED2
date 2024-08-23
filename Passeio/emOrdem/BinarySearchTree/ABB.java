@@ -1,3 +1,7 @@
+package BinarySearchTree;
+import TADQueue.Queue;
+import java.util.Stack;
+
 public class ABB{
     private ABBNode raiz;
 
@@ -193,6 +197,51 @@ public class ABB{
             System.out.println("O maior valor encontrado foi " + node.getinfo());
         }
     }
+
+    public void PorNivel(){ // não recursivo
+        Queue<ABBNode>fila;
+        ABBNode aux;
+        if(this.isEmpty() == false){
+            fila = new Queue<ABBNode>();
+            fila.enQueue(raiz);
+            while(!fila.isEmpty()){
+                aux = fila.deQueue();
+                if(aux.getEsq() != null){
+                    fila.enQueue(aux.getEsq());
+                }
+                if(aux.getDir() != null){
+                    fila.enQueue(aux.getDir());
+                }
+                System.out.println(aux.getinfo());
+            }            
+        }
+        else{
+            System.out.println("Árvore vazia");
+        }
+    }
+
+    public void emOrdemNaoRec(){
+        Stack<ABBNode>pilha; // Stack<ABBNode<T>>pilha
+        ABBNode aux = null; // ABBNode <T> --> mudar depois
+        if(this.isEmpty()){
+            System.out.println("Árvore vazia");
+        }
+        else{
+            pilha = new Stack<ABBNode>();
+            pilha.push(raiz);
+            while(!pilha.isEmpty() || aux != null){
+                while(aux != null){
+                    pilha.push(aux);
+                    aux = aux.getEsq();
+                }
+                aux = pilha.pop();
+                System.out.println(aux.getinfo());
+                aux = aux.getDir();
+            }
+        }
+    }
+
+
 
 }
 class ABBNode{ //referencia para um objeto
