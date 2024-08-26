@@ -25,4 +25,10 @@ class ABBNode {
         this.info = prod;
     }
 
+    /* 
+     Produto getInfo(){
+        return this.info;
+    }
+    */
+    
 }
