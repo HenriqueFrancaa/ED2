@@ -189,4 +189,8 @@ public class ABB<T extends Comparable <T>> {
             System.out.println();
         }
     }
+
+    public void emOrdemNaorec(){
+        
+    }
 }
