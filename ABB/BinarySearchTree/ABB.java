@@ -312,13 +312,13 @@ public class ABB{
     }
 
 
-    private void ContagemNosEmOrdemrec(ABBNode r){ // ATIVIDADE 2 QUESTÃO 6 -> letra a)
+    private int ContagemNosEmOrdemrec(ABBNode r, int cont){ // ATIVIDADE 2 QUESTÃO 6 -> letra a)
         if(r != null){
-            ContagemNosEmOrdemrec(r.getEsq());
+            ContagemNosEmOrdemrec(r.getEsq(), cont++);
             //System.out.println(r.getinfo());
-            this.cont++;
-            ContagemNosEmOrdemrec(r.getDir());
+            ContagemNosEmOrdemrec(r.getDir(), cont++);
         }
+        return cont;
     }
 
     public void nosEmOrdemrec(){
@@ -327,8 +327,8 @@ public class ABB{
         }
         else{
             this.cont = 0;
-            this.ContagemNosEmOrdemrec(raiz);
-            System.out.println(this.cont);
+            //this.ContagemNosEmOrdemrec(raiz, 0);
+            System.out.println(this.ContagemNosEmOrdemrec(raiz, 0));
         }
     }
 

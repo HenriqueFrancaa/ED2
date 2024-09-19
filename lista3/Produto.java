@@ -4,8 +4,12 @@ class Produto {
     private int estoque;
 
 
-    Produto(String codigo) {
+    Produto(String codigo, String descricao, String fornecedor, Double preco, int estoque) {
         this.codigo = codigo;
+        this.descricao = descricao;
+        this.fornecedor = fornecedor;
+        this.preco = preco;
+        this.estoque = estoque;
     }
 
     String getCodigo() {
@@ -48,8 +52,18 @@ class Produto {
         this.estoque = estoque;
     }
     
-    
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
 
-    
+       return "Codigo: " + this.codigo + " Descrição: " + this.descricao + " Fornecedor: " + this.fornecedor + 
+        " Preço: " + this.estoque + " Estoque:" + this.estoque;
+
+    }
+
+    public int CompareTo(){
+        
+        return 0;
+    }
     
 }
