@@ -11,6 +11,13 @@ public class RB<T extends Comparable<T>>{
         return false;
     }
 
+    private void CorrigeInsert(RBNode<T> z){
+
+        while(z.getPai().getColor() == 1){
+            
+        }
+    }
+
     public void insert(RBNode<T> z){
         RBNode<T>x = this.root;
         RBNode<T>y = tnil;
