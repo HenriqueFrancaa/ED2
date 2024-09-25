@@ -18,28 +18,35 @@ public class RB<T extends Comparable<T>>{
         RBNode<T>s; // tio de k
         while(p.getColor() == 'v'){
             g = p.getPai();
-            if(p == g.getLeft()){ // pai de K é filho esquerdo?
-                s = g.getRight(); // tio de K, filho a direita do avô de K
-            }
-            else{
-                s = g.getLeft(); // tio de K, filho a esquerda do avô de K
-            }
-            if(s.getColor() == 'v'){
-                //recolorir
-                p.setColor('p');
-                s.setColor('p');
-                if(g == this.root){
+            if(p == g.getLeft()){// pai de K é filho esquerdo
+                s = g.getRight();
+                if(s.getColor() == 'v'){ // pai e tio de K são vermelhos?
+                    p.setColor('p');
+                    s.setColor('p');
                     g.setColor('p');
-                }else{
+                    k = g;
+                }
+                else{
+                    if(k == p.getRight()){
+                        //RotacionaEsquerda(T,P);
+                    }
+                    p.setColor('p');
                     g.setColor('v');
+                    //RotacionaDireita(T,g);
                 }
             }
-
-            else{ // rotação
+            else{
+                s = g.getLeft();
+                if(s.getColor() == 'v'){
+                    p.setColor('p');
+                    s.setColor('p');
+                    g.setColor('v');
+                    k = g;
+                }
+                if(k == p.getLeft())
+            }                  
                 
-            }
-            k = g; // novo K
-            p = k.getPai(); // novo P
+                
         }
 
 
