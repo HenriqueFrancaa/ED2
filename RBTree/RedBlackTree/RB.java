@@ -1,9 +1,9 @@
 package RedBlackTree;
 
-import java.awt.Paint;
-
 public class RB<T extends Comparable<T>>{
     private RBNode<T> root;
+    private RBNode<T> tnil;
+
     public boolean isEmpty(){
         if(this.root == null){
             return true;
@@ -11,82 +11,33 @@ public class RB<T extends Comparable<T>>{
         return false;
     }
 
-    private void CorrigeInsert(RBNode<T> k){
-
-        RBNode<T> p = k.getPai(); //pai de k
-        RBNode<T>g; // avô de k
-        RBNode<T>s; // tio de k
-        while(p.getColor() == 'v'){
-            g = p.getPai();
-            if(p == g.getLeft()){// pai de K é filho esquerdo
-                s = g.getRight();
-                if(s.getColor() == 'v'){ // pai e tio de K são vermelhos?
-                    p.setColor('p');
-                    s.setColor('p');
-                    g.setColor('p');
-                    k = g;
-                }
-                else{
-                    if(k == p.getRight()){
-                        //RotacionaEsquerda(T,P);
-                    }
-                    p.setColor('p');
-                    g.setColor('v');
-                    //RotacionaDireita(T,g);
-                }
+    public void insert(RBNode<T> z){
+        RBNode<T>x = this.root;
+        RBNode<T>y = tnil;
+        
+        while(x != tnil){
+            y = x;
+            if(z.getInfo().compareTo(x.getInfo()) < 0){
+                x = x.getLeft();
             }
             else{
-                s = g.getLeft();
-                if(s.getColor() == 'v'){
-                    p.setColor('p');
-                    s.setColor('p');
-                    g.setColor('v');
-                    k = g;
-                }
-                if(k == p.getLeft())
-            }                  
-                
-                
+                x = x.getRight();
+            }
         }
-
-
-    }
-
-    public void insert(T value){
-        RBNode<T> novo = new RBNode<T>(value);
-        if(this.isEmpty()){
-            novo.setColor('p');
-            this.root = novo;
+        z.setPai(y);
+        if(y == tnil){ // arvore esta vazia...posso chamar a função isEmpty() mas o livro adota assim
+            this.root = z;
+        }
+        else if(z.getInfo().compareTo(y.getInfo()) < 0){
+            y.setLeft(z);
         }
         else{
-            RBNode<T> aux = this.root;
-            RBNode<T> pai = aux; // pai de aux
-            int result;
-            while(aux != null){
-                pai = aux;
-                result = value.compareTo(aux.getInfo());
-                if(result < 0){
-                    aux = aux.getLeft();
-                }
-                else if(result > 0){
-                    aux = aux.getRight();
-                }
-                else{
-                    System.out.println("Valor repetido!");
-                    return;
-                }
-
-            }
-            novo.setPai(pai); // colocando o pai do novo nó
-            if(novo.getInfo().compareTo(pai.getInfo()) < 0){
-                pai.setLeft(novo);
-            }
-            else{
-                pai.setRight(novo);
-            }
-            CorrigeInsert(novo);
+            y.setRight(z);
         }
-
+        z.setLeft(tnil);
+        z.setRight(tnil);
+        z.setColor(1); // novo nó começa com vermelho
+        CorrigeInsert(z); // corrige qualquer violação das propriedades vermelho-preto
     }
 
 }

@@ -5,12 +5,12 @@ class RBNode<T extends Comparable<T>>{
     private RBNode<T> left;
     private RBNode<T> right;
     private RBNode<T> pai;
-    private int status;
-    private char color;
+    private int status; // 1 - ativo , -1 inativo
+    private int color; // 1 - vermelho , 0 - preto
 
     RBNode(T value){
         this.info = value;
-        this.color = 'v';
+        this.color = 0;
     }
 
     void setInfo(T value){
@@ -33,10 +33,10 @@ class RBNode<T extends Comparable<T>>{
         return this.right;
     }
 
-    void setColor(char c){
+    void setColor(int c){
         this.color = c;
     }
-    char getColor(){
+    int getColor(){
         return this.color;
     }
     void setStatus(int s){
