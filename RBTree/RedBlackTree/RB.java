@@ -1,6 +1,6 @@
 package RedBlackTree;
-
 import TADQueue.Queue;
+
 
 public class RB<T extends Comparable<T>>{
     private RBNode<T> root;
@@ -13,25 +13,28 @@ public class RB<T extends Comparable<T>>{
 
 
     public boolean isEmpty(){
-        if(this.root == tnil){
+        if(this.root == tnil){ // verificando se a arvore está vazia
             return true;
         }
         return false;
     }
 
 
-    private void leftRotate(RBNode<T> a){
+    private void leftRotate(RBNode<T> a){ //ROTAÇÃO SIMPLES PRA ESQUERDA
         RBNode<T> b;
-        b = a.getRight();
+        b = a.getRight(); //filho a direita do nó A
         
-        a.setRight(b.getLeft());
-        if(b.getLeft() != tnil){
-            b.getLeft().setPai(a);
+        a.setRight(b.getLeft()); //transforma a subárvore à esquerda de B na subárvore à direita de A;
+
+        if(b.getLeft() != tnil){ //verificando se B tem filho da esquerda, 
+            b.getLeft().setPai(a); //atualizando o pai do filho à esquerda de B para A;
         }
         b.setPai(a.getPai()); // liga o pai de A para B
+
         if(a.getPai() == tnil){
-            this.root = b;
+            this.root = b; //caso o pai de A seja a raiz, atualizamos a raiz para B;
         }
+
         else if(a == a.getPai().getLeft()){
             a.getPai().setLeft(b);
         }
@@ -67,13 +70,13 @@ public class RB<T extends Comparable<T>>{
     }
 
     private void CorrigeInsert(RBNode<T> k){
-        RBNode<T>s; // tio
-        RBNode<T>p = k.getPai();
-        RBNode<T>g = p.getPai();
+        RBNode<T>s; // tio de K
+        RBNode<T>p = k.getPai(); // pai de K
+        RBNode<T>g = p.getPai(); // avô de K
         while(p.getColor() == 1){
             
-            if(p == g.getLeft()){ // p é o filho a esquerda
-                s = g.getRight(); // y é o tio de Z, filho da direita do avô de Z
+            if(p == g.getLeft()){ // p é o filho a esq
+                s = g.getRight(); // y é o tio de Z, filho da dir do avô de Z
                 if(s.getColor() == 1){ // se o tio for vermelho -> recolorir
                     p.setColor(0);
                     s.setColor(0);
@@ -82,16 +85,19 @@ public class RB<T extends Comparable<T>>{
                     p = k.getPai();
                     g = p.getPai();
                 }
-                else { // k é o filho da direita, p é filho da esq e k da direita
+                else { //tio.cor != vermelho -> rotação
                     if(k == p.getRight()){
                         k = k.getPai(); //ROTAÇÃO DUPLA
-                        leftRotate(k);
+                                        //como sabemos que P já é filho da esquerda, se K for filho da direita de P
+                                        //vamos ter que realizar uma rotação dupla pra dir
+                        leftRotate(k); //rotação simples pra esq e depois rotação simples pra dir
                     }
-                    p = k.getPai();
+                    //atualizando o P e o G pelo novo K;
+                    p = k.getPai(); 
                     g = p.getPai();
                     p.setColor(0);
                     g.setColor(1);
-                    rightRotate(g);
+                    rightRotate(g); //ROTAÇÃO SIMPLES PRA DIREITA
                 }
             }
             else{
@@ -135,22 +141,22 @@ public class RB<T extends Comparable<T>>{
                 aux = aux.getLeft();
             }
             else{
-                aux = aux.getRight(); //pegando a direita
+                aux = aux.getRight(); //pegando a dir
             }
         }
 
-        k.setPai(p); //setando o pai do K para o P;
+        k.setPai(p); //atualizando o pai do K para P;
         
         if(p == tnil){ // arvore esta vazia...posso chamar a função isEmpty() mas o livro adota assim
             this.root = k;
         }
-        else if(k.getInfo().compareTo(p.getInfo()) < 0){
+        else if(k.getInfo().compareTo(p.getInfo()) < 0){ //verificando de qual lado deve ser o filho de P;
             p.setLeft(k);
         }
         else{
             p.setRight(k);
         }
-        k.setLeft(tnil);
+        k.setLeft(tnil); //fazendo o nó inserido apontar para o TNIL(null)
         k.setRight(tnil);
         k.setColor(1); // novo nó começa com vermelho
         CorrigeInsert(k); // corrige qualquer violação das propriedades vermelho-preto
@@ -162,10 +168,10 @@ public class RB<T extends Comparable<T>>{
             if(r.getStatus() == 1){
 
                 if(r.getColor() == 1){
-                    System.out.print("\u001B[31m" + r.getInfo() + "\u001B[0m" + ' ');
+                    System.out.print("\u001B[31m" + "[ " + r.getInfo() + " , " + " V ]" + "\u001B[0m" + ' ');
                 }
                 else{
-                    System.out.print("\u001B[30m" + r.getInfo() + "\u001B[0m" + ' ');
+                    System.out.print("\u001B[30m" + "[ " + r.getInfo() + " , " + "P ]" + "\u001B[0m" + ' ');
                 }
             }
             passeioEmOrdem(r.getRight());
@@ -182,7 +188,7 @@ public class RB<T extends Comparable<T>>{
         }
     }
 
-    public void porNivel() {
+    private void passeioPorNivel() {
         Queue<RBNode<T>> fila;
         RBNode<T> aux;
         if (this.isEmpty() == false) {
@@ -203,9 +209,14 @@ public class RB<T extends Comparable<T>>{
                     fila.enQueue(tnil);
                 }
                 if (aux == tnil) {
-                    System.out.print("null ");
+                    System.out.print("\u001B[30m" + "[ null , P ] " + "\u001B[0m" + ' ' );
                 } else {
-                    System.out.print(aux.getInfo() + " ");
+                    if (aux.getColor() == 1) {
+                        System.out.print("\u001B[31m" + "[ " + aux.getInfo() + " , " + " V ]" + "\u001B[0m" + ' ');
+                    }
+                    else{
+                        System.out.print("\u001B[30m" + "[ " + aux.getInfo() + " , " + "P ]" + "\u001B[0m" + ' ');
+                    }
                 }
             }
             System.out.println();
@@ -213,7 +224,14 @@ public class RB<T extends Comparable<T>>{
 
     }
 
-
+    public void porNivel(){
+        if(this.isEmpty()){
+            System.out.println("Árvore está vazia");
+        }
+        else{
+            this.passeioPorNivel();
+        }
+    }
 
     private void removerNode(T value){
         RBNode<T>aux = this.root;
