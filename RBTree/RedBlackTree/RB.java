@@ -171,4 +171,39 @@ public class RB<T extends Comparable<T>>{
         }
     }
 
+    private void removerNode(T value){
+        RBNode<T>aux = this.root;
+        int result;
+        while (aux != tnil) { 
+            result = value.compareTo(aux.getInfo());
+            if(result == 0){
+                if(aux.getStatus() == 1){
+                    aux.setStatus(0);
+                    System.out.println("Removido!");
+                }
+                else{
+                    System.out.println("Este valor já foi removido!");
+                }
+                return;
+            }
+            else if(result < 0){
+                aux = aux.getLeft();
+            }
+            else{
+                aux = aux.getRight();
+            }
+        }
+    }
+
+    public void remover(T value){
+        if(this.root == tnil){
+            System.out.println("Árvore vázia!");
+        }
+        else{
+            removerNode(value);
+        }
+
+    }
+    
+
 }

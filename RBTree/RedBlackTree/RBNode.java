@@ -5,7 +5,7 @@ class RBNode<T extends Comparable<T>>{
     private RBNode<T> left;
     private RBNode<T> right;
     private RBNode<T> pai;
-    private int status; // 1 - ativo , -1 inativo
+    private int status; // 1 - ativo , 0 inativo
     private int color; // 1 - vermelho , 0 - preto
 
     RBNode(){

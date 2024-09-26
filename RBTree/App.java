@@ -10,7 +10,7 @@ public class App {
         }
         System.out.println();
         RB<Integer>arv2 = new RB<Integer>();
-        int[] values = {27,14,33,7,45,20,70,50,60,55};
+        int[] values = {11,27,32,43,50,61,70,99,98,97,95,93,92,91,80};
         for(int i = 0; i < values.length; i++){
             arv2.insert(values[i]);
             arv2.emOrdem();
