@@ -1,5 +1,7 @@
 package RedBlackTree;
 
+import java.time.Year;
+
 public class RB<T extends Comparable<T>>{
     private RBNode<T> root;
     private RBNode<T> tnil;
@@ -23,10 +25,20 @@ public class RB<T extends Comparable<T>>{
         b = a.getRight();
         
         a.setRight(b.getLeft());
-        b.getLeft().setPai(a);
+        if(b.getLeft() != tnil){
+            b.getLeft().setPai(a);
+        }
+        b.setPai(a.getPai()); // liga o pai de A para B
+        if(a.getPai() == tnil){
+            this.root = b;
+        }
+        else if(a == a.getPai().getLeft()){
+            a.getPai().setLeft(b);
+        }
+        else{
+            a.getPai().setRight(b);
+        }
         b.setLeft(a);
-        b.setPai(a.getPai());
-        a.getPai().setLeft(b);
         a.setPai(b);
 
     }
@@ -36,11 +48,22 @@ public class RB<T extends Comparable<T>>{
         b = a.getLeft();
         
         a.setLeft(b.getRight());
-        b.getRight().setPai(a);
-        b.setRight(a);
+        if(b.getRight() != tnil){
+            b.getRight().setPai(a);
+        }
         b.setPai(a.getPai());
-        a.getPai().setRight(b);
-        a.setPai(b);    
+        if(a.getPai() == tnil){
+            this.root = b;
+        }
+        else if(a == a.getPai().getRight()){
+            a.getPai().setRight(b);
+        }
+        else{
+            a.getPai().setLeft(b);
+        }
+        b.setRight(a);
+        a.setPai(b);
+
     }
 
     private void CorrigeInsert(RBNode<T> k){
@@ -60,7 +83,7 @@ public class RB<T extends Comparable<T>>{
                     k = k.getPai(); //ROTAÇÃO DUPLA
                     leftRotate(k);
                 }
-                if(k == this.root)return;
+                
                 p = k.getPai();
                 g = p.getPai();
                 p.setColor(0);
@@ -78,8 +101,9 @@ public class RB<T extends Comparable<T>>{
                 else if(k == p.getLeft()){
                     k = k.getPai();
                     rightRotate(k);
+                    
                 }
-                if(k == this.root)return;
+                
                 p = k.getPai();
                 g = p.getPai();
                 p.setColor(0);
