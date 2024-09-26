@@ -150,7 +150,12 @@ public class RB<T extends Comparable<T>>{
     private void passeioEmOrdem(RBNode<T> r) {
         if (r != tnil) {
             passeioEmOrdem(r.getLeft());
-            System.out.print(r.getInfo() + " ");
+            if(r.getColor() == 1){
+                System.out.print("\u001B[31m" + r.getInfo() + "\u001B[0m" + ' ');
+            }
+            else{
+                System.out.print("\u001B[30m" + r.getInfo() + "\u001B[0m" + ' ');
+            }
             passeioEmOrdem(r.getRight());
         }
     }
