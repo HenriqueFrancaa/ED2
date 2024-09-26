@@ -36,36 +36,38 @@ public class RB<T extends Comparable<T>>{
         }
 
         else if(a == a.getPai().getLeft()){
-            a.getPai().setLeft(b);
+            a.getPai().setLeft(b); // atualizando a esq do pai de A para B
         }
         else{
-            a.getPai().setRight(b);
+            a.getPai().setRight(b); // atualizando a dir do pai de A para B
         }
-        b.setLeft(a);
-        a.setPai(b);
+        b.setLeft(a); // coloca A à esq de B
+        a.setPai(b); //atualiza o pai de A para B;
 
     }
 
     private void rightRotate(RBNode<T> a){
         RBNode<T> b;
-        b = a.getLeft();
+        b = a.getLeft(); // filho à esq de A
         
-        a.setLeft(b.getRight());
-        if(b.getRight() != tnil){
-            b.getRight().setPai(a);
+        a.setLeft(b.getRight()); //transforma a subárvore à dir de B na subárvore à esq de A;
+        if(b.getRight() != tnil){// verificando se B tem filho da dir
+            b.getRight().setPai(a);// atualizando o pai do filho à dir de B para A
         }
-        b.setPai(a.getPai());
+        b.setPai(a.getPai()); // liga o pai de A para B
+
         if(a.getPai() == tnil){
-            this.root = b;
+            this.root = b; // B vira a raiz, caso o pai de A seja a raiz
         }
         else if(a == a.getPai().getRight()){
-            a.getPai().setRight(b);
+            a.getPai().setRight(b); //atualizando a dir do pai de A para B
         }
         else{
-            a.getPai().setLeft(b);
+            a.getPai().setLeft(b); // atualizando a esq do pai de A para B
         }
-        b.setRight(a);
-        a.setPai(b);
+
+        b.setRight(a); // coloca A à dir de B
+        a.setPai(b); // atualizando o pai de A para B
 
     }
 
@@ -87,40 +89,40 @@ public class RB<T extends Comparable<T>>{
                 }
                 else { //tio.cor != vermelho -> rotação
                     if(k == p.getRight()){
-                        k = k.getPai(); //ROTAÇÃO DUPLA
+                        k = k.getPai(); //R.D.D
                                         //como sabemos que P já é filho da esquerda, se K for filho da direita de P
                                         //vamos ter que realizar uma rotação dupla pra dir
-                        leftRotate(k); //rotação simples pra esq e depois rotação simples pra dir
+                        leftRotate(k); //R.S.E e depois R.S.D
                     }
                     //atualizando o P e o G pelo novo K;
                     p = k.getPai(); 
                     g = p.getPai();
                     p.setColor(0);
                     g.setColor(1);
-                    rightRotate(g); //ROTAÇÃO SIMPLES PRA DIREITA
+                    rightRotate(g); //R.S.D
                 }
             }
             else{
-                s = g.getLeft(); // s é o filho da esquerda do avô;
-                if(s.getColor() == 1){
-                    p.setColor(0);
-                    s.setColor(0);
-                    g.setColor(1);
-                    k = g;
-                    p = k.getPai();
-                    g = p.getPai();
+                s = g.getLeft(); // S é o filho da esquerda do avô;
+                if(s.getColor() == 1){ //S é Vermelho -> RECOLORIR
+                    p.setColor(0);  //P vira Preto
+                    s.setColor(0);  //S vira Preto
+                    g.setColor(1); //G vira Vermelho
+                    k = g; // novo K
+                    p = k.getPai(); //novo P
+                    g = p.getPai(); // novo G
                 }
                 else{
-                    if(k == p.getLeft()){
-                        k = k.getPai();
-                        rightRotate(k);
+                    if(k == p.getLeft()){ //P é filho da dir e se K for filho da esq de P
+                        k = k.getPai();     //fazer uma R.D.E
+                        rightRotate(k);     //fazendo um R.S.D e depois uma R.S.E
                     }
-                    
+                    //atualizando o novo p e G pelo novo K;
                     p = k.getPai();
                     g = p.getPai();
                     p.setColor(0);
                     g.setColor(1);
-                    leftRotate(g);
+                    leftRotate(g); //R.S.E
                 }
             }
         }
