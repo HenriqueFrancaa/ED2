@@ -1,7 +1,5 @@
 package RedBlackTree;
 
-import java.time.Year;
-
 public class RB<T extends Comparable<T>>{
     private RBNode<T> root;
     private RBNode<T> tnil;
@@ -71,8 +69,7 @@ public class RB<T extends Comparable<T>>{
         RBNode<T>p = k.getPai();
         RBNode<T>g = p.getPai();
         while(p.getColor() == 1){
-            p = k.getPai();
-            g = p.getPai();
+            
             if(p == g.getLeft()){ // p é o filho a esquerda
                 s = g.getRight(); // y é o tio de Z, filho da direita do avô de Z
                 if(s.getColor() == 1){ // se o tio for vermelho -> recolorir
@@ -80,6 +77,8 @@ public class RB<T extends Comparable<T>>{
                     s.setColor(0);
                     g.setColor(1);
                     k = g; // novo k vai ser onde estava o avo;
+                    p = k.getPai();
+                    g = p.getPai();
                 }
                 else { // k é o filho da direita, p é filho da esq e k da direita
                     if(k == p.getRight()){
@@ -100,6 +99,8 @@ public class RB<T extends Comparable<T>>{
                     s.setColor(0);
                     g.setColor(1);
                     k = g;
+                    p = k.getPai();
+                    g = p.getPai();
                 }
                 else{
                     if(k == p.getLeft()){
