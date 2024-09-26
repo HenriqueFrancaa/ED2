@@ -11,11 +11,54 @@ public class RB<T extends Comparable<T>>{
         return false;
     }
 
-    private void CorrigeInsert(RBNode<T> z){
+    private void leftRotate(RBNode<T> a){
+        RBNode<T> b;
+        b = a.getRight();
+        
+        a.setRight(b.getLeft());
+        b.getLeft().setPai(a);
+        b.setLeft(a);
+        b.setPai(a.getPai());
+        a.getPai().setLeft(b);
+        a.setPai(b);
 
-        while(z.getPai().getColor() == 1){
-            
+    }
+
+    private void rightRotate(RBNode<T> a){
+        RBNode<T> b;
+        b = a.getLeft();
+        
+        a.setLeft(b.getRight());
+        b.getRight().setPai(a);
+        b.setRight(a);
+        b.setPai(a.getPai());
+        a.getPai().setRight(b);
+        a.setPai(b);    
+    }
+
+    private void CorrigeInsert(RBNode<T> k){
+        RBNode<T>s; // tio
+        RBNode<T>p = k.getPai();
+        RBNode<T>g = p.getPai();
+        while(p.getColor() == 1){
+            if(p == g.getLeft()){ // p é o filho a esquerda
+                s = g.getRight(); // y é o tio de Z, filho da direita do avô de Z
+                if(s.getColor() == 1){ // se o tio for vermelho -> recolorir
+                    p.setColor(0);
+                    s.setColor(0);
+                    g.setColor(1);
+                    k = g; // novo k vai ser onde estava o avo;
+                }
+                else if(k == p.getRight()){ // k é o filho da direita, p é filho da esq e k da direita
+                    k = k.getPai(); //ROTAÇÃO DUPLA
+                    //leftRotate(k)
+                }
+                
+            }
+            p = k.getPai();
+            g = p.getPai();
         }
+        this.root.setColor(0);
     }
 
     public void insert(RBNode<T> z){

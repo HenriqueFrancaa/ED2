@@ -8,9 +8,21 @@ class RBNode<T extends Comparable<T>>{
     private int status; // 1 - ativo , -1 inativo
     private int color; // 1 - vermelho , 0 - preto
 
+    RBNode(){
+        this.color = 0;
+        this.status = 1;
+        this.left = this;
+        this.right = this;
+        this.pai = this;
+    }
+
     RBNode(T value){
         this.info = value;
         this.color = 0;
+        this.left = null;
+        this.right = null;
+        this.pai = null;
+        this.status = 1;
     }
 
     void setInfo(T value){
