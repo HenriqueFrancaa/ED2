@@ -4,12 +4,19 @@ public class RB<T extends Comparable<T>>{
     private RBNode<T> root;
     private RBNode<T> tnil;
 
+    public RB(){
+        tnil = new RBNode<T>();
+        root = tnil;
+    }
+
+
     public boolean isEmpty(){
-        if(this.root == null){
+        if(this.root == tnil){
             return true;
         }
         return false;
     }
+
 
     private void leftRotate(RBNode<T> a){
         RBNode<T> b;
@@ -51,20 +58,42 @@ public class RB<T extends Comparable<T>>{
                 }
                 else if(k == p.getRight()){ // k é o filho da direita, p é filho da esq e k da direita
                     k = k.getPai(); //ROTAÇÃO DUPLA
-                    //leftRotate(k)
+                    leftRotate(k);
                 }
-                
+                if(k == this.root)return;
+                p = k.getPai();
+                g = p.getPai();
+                p.setColor(0);
+                g.setColor(1);
+                rightRotate(g);
             }
-            p = k.getPai();
-            g = p.getPai();
+            else{
+                s = g.getLeft(); // s é o filho da esquerda do avô;
+                if(s.getColor() == 1){
+                    p.setColor(0);
+                    s.setColor(0);
+                    g.setColor(1);
+                    k = g;
+                }
+                else if(k == p.getLeft()){
+                    k = k.getPai();
+                    rightRotate(k);
+                }
+                if(k == this.root)return;
+                p = k.getPai();
+                g = p.getPai();
+                p.setColor(0);
+                g.setColor(1);
+                leftRotate(g);
+            }
         }
         this.root.setColor(0);
     }
 
-    public void insert(RBNode<T> z){
+    public void insert(T value){
         RBNode<T>x = this.root;
         RBNode<T>y = tnil;
-        
+        RBNode<T>z = new RBNode<T>(value);
         while(x != tnil){
             y = x;
             if(z.getInfo().compareTo(x.getInfo()) < 0){
@@ -88,6 +117,24 @@ public class RB<T extends Comparable<T>>{
         z.setRight(tnil);
         z.setColor(1); // novo nó começa com vermelho
         CorrigeInsert(z); // corrige qualquer violação das propriedades vermelho-preto
+    }
+
+    private void passeioEmOrdem(RBNode<T> r) {
+        if (r != tnil) {
+            passeioEmOrdem(r.getLeft());
+            System.out.print(r.getInfo() + " ");
+            passeioEmOrdem(r.getRight());
+        }
+    }
+
+    public void emOrdem(){
+        if(this.isEmpty() == true){
+            System.out.println("Árvore está vázia!");
+        }
+        else{
+            this.passeioEmOrdem(root);
+            System.out.println();
+        }
     }
 
 }
