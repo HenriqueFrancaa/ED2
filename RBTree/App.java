@@ -20,7 +20,7 @@ public class App {
                     arv.remover(num);
                     break;
                 case 3:// Passeio por Nivel
-                    //arv.porNivel();
+                    arv.porNivel();
                     break;
                 case 4:// Passeio por Ordem;
                     arv.emOrdem();

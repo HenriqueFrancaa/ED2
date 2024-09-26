@@ -1,5 +1,7 @@
 package RedBlackTree;
 
+import TADQueue.Queue;
+
 public class RB<T extends Comparable<T>>{
     private RBNode<T> root;
     private RBNode<T> tnil;
@@ -179,6 +181,39 @@ public class RB<T extends Comparable<T>>{
             System.out.println();
         }
     }
+
+    public void porNivel() {
+        Queue<RBNode<T>> fila;
+        RBNode<T> aux;
+        if (this.isEmpty() == false) {
+            fila = new Queue<RBNode<T>>();
+            fila.enQueue(root);
+            while (fila.isEmpty() == false) {
+                aux = fila.deQueue();
+                if (aux.getLeft() != tnil) {
+                    fila.enQueue(aux.getLeft());
+                }
+                if(aux.getRight() != tnil && aux.getLeft() == tnil){
+                    fila.enQueue(tnil);
+                }
+                if(aux.getRight() != tnil){
+                    fila.enQueue(aux.getRight());
+                }
+                if(aux.getLeft() != tnil && aux.getRight() == tnil){
+                    fila.enQueue(tnil);
+                }
+                if (aux == tnil) {
+                    System.out.print("null ");
+                } else {
+                    System.out.print(aux.getInfo() + " ");
+                }
+            }
+            System.out.println();
+        }
+
+    }
+
+
 
     private void removerNode(T value){
         RBNode<T>aux = this.root;

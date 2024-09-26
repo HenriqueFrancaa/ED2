@@ -16,5 +16,8 @@ public class Teste {
             arv2.insert(values[i]);
             arv2.emOrdem();
         }
+
+        System.out.println();
+        arv2.porNivel();
     }
 }
