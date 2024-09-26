@@ -5,7 +5,7 @@ public class RB<T extends Comparable<T>>{
     private RBNode<T> tnil;
 
     public RB(){
-        tnil = new RBNode<T>();
+        tnil = new RBNode<T>(); //nó de null com os atributos de um nó normal, folha da cor PRETA
         root = tnil;
     }
 
@@ -125,18 +125,20 @@ public class RB<T extends Comparable<T>>{
         RBNode<T>k = new RBNode<T>(value);
         while(aux != tnil){
             p = aux;
-            if(k.getInfo().compareTo(aux.getInfo()) == 0){
+            if(k.getInfo().compareTo(aux.getInfo()) == 0){ //valor repetido
                 System.out.println("Esse valor já está inserido!");
                 return;
             }
-            if(k.getInfo().compareTo(aux.getInfo()) < 0){
+            if(k.getInfo().compareTo(aux.getInfo()) < 0){ //indo pra esquerda
                 aux = aux.getLeft();
             }
             else{
-                aux = aux.getRight();
+                aux = aux.getRight(); //pegando a direita
             }
         }
-        k.setPai(p);
+
+        k.setPai(p); //setando o pai do K para o P;
+        
         if(p == tnil){ // arvore esta vazia...posso chamar a função isEmpty() mas o livro adota assim
             this.root = k;
         }
@@ -155,11 +157,14 @@ public class RB<T extends Comparable<T>>{
     private void passeioEmOrdem(RBNode<T> r) {
         if (r != tnil) {
             passeioEmOrdem(r.getLeft());
-            if(r.getColor() == 1){
-                System.out.print("\u001B[31m" + r.getInfo() + "\u001B[0m" + ' ');
-            }
-            else{
-                System.out.print("\u001B[30m" + r.getInfo() + "\u001B[0m" + ' ');
+            if(r.getStatus() == 1){
+
+                if(r.getColor() == 1){
+                    System.out.print("\u001B[31m" + r.getInfo() + "\u001B[0m" + ' ');
+                }
+                else{
+                    System.out.print("\u001B[30m" + r.getInfo() + "\u001B[0m" + ' ');
+                }
             }
             passeioEmOrdem(r.getRight());
         }
