@@ -8,5 +8,13 @@ public class App {
             arv.insert(arr[i]);
             arv.emOrdem();
         }
+        System.out.println();
+        RB<Integer>arv2 = new RB<Integer>();
+        int[] values = {27,14,33,7,45,20,70,50,60,55};
+        for(int i = 0; i < values.length; i++){
+            arv2.insert(values[i]);
+            arv2.emOrdem();
+        }   
+
     }
 }

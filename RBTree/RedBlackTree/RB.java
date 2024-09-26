@@ -71,6 +71,8 @@ public class RB<T extends Comparable<T>>{
         RBNode<T>p = k.getPai();
         RBNode<T>g = p.getPai();
         while(p.getColor() == 1){
+            p = k.getPai();
+            g = p.getPai();
             if(p == g.getLeft()){ // p é o filho a esquerda
                 s = g.getRight(); // y é o tio de Z, filho da direita do avô de Z
                 if(s.getColor() == 1){ // se o tio for vermelho -> recolorir
@@ -79,16 +81,17 @@ public class RB<T extends Comparable<T>>{
                     g.setColor(1);
                     k = g; // novo k vai ser onde estava o avo;
                 }
-                else if(k == p.getRight()){ // k é o filho da direita, p é filho da esq e k da direita
-                    k = k.getPai(); //ROTAÇÃO DUPLA
-                    leftRotate(k);
+                else { // k é o filho da direita, p é filho da esq e k da direita
+                    if(k == p.getRight()){
+                        k = k.getPai(); //ROTAÇÃO DUPLA
+                        leftRotate(k);
+                    }
+                    p = k.getPai();
+                    g = p.getPai();
+                    p.setColor(0);
+                    g.setColor(1);
+                    rightRotate(g);
                 }
-                
-                p = k.getPai();
-                g = p.getPai();
-                p.setColor(0);
-                g.setColor(1);
-                rightRotate(g);
             }
             else{
                 s = g.getLeft(); // s é o filho da esquerda do avô;
@@ -98,17 +101,18 @@ public class RB<T extends Comparable<T>>{
                     g.setColor(1);
                     k = g;
                 }
-                else if(k == p.getLeft()){
-                    k = k.getPai();
-                    rightRotate(k);
+                else{
+                    if(k == p.getLeft()){
+                        k = k.getPai();
+                        rightRotate(k);
+                    }
                     
+                    p = k.getPai();
+                    g = p.getPai();
+                    p.setColor(0);
+                    g.setColor(1);
+                    leftRotate(g);
                 }
-                
-                p = k.getPai();
-                g = p.getPai();
-                p.setColor(0);
-                g.setColor(1);
-                leftRotate(g);
             }
         }
         this.root.setColor(0);
