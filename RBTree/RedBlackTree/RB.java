@@ -125,6 +125,10 @@ public class RB<T extends Comparable<T>>{
         RBNode<T>k = new RBNode<T>(value);
         while(aux != tnil){
             p = aux;
+            if(k.getInfo().compareTo(aux.getInfo()) == 0){
+                System.out.println("Esse valor já está inserido!");
+                return;
+            }
             if(k.getInfo().compareTo(aux.getInfo()) < 0){
                 aux = aux.getLeft();
             }
