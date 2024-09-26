@@ -120,32 +120,32 @@ public class RB<T extends Comparable<T>>{
     }
 
     public void insert(T value){
-        RBNode<T>x = this.root;
-        RBNode<T>y = tnil;
-        RBNode<T>z = new RBNode<T>(value);
-        while(x != tnil){
-            y = x;
-            if(z.getInfo().compareTo(x.getInfo()) < 0){
-                x = x.getLeft();
+        RBNode<T>aux = this.root;
+        RBNode<T>p = tnil;
+        RBNode<T>k = new RBNode<T>(value);
+        while(aux != tnil){
+            p = aux;
+            if(k.getInfo().compareTo(aux.getInfo()) < 0){
+                aux = aux.getLeft();
             }
             else{
-                x = x.getRight();
+                aux = aux.getRight();
             }
         }
-        z.setPai(y);
-        if(y == tnil){ // arvore esta vazia...posso chamar a função isEmpty() mas o livro adota assim
-            this.root = z;
+        k.setPai(p);
+        if(p == tnil){ // arvore esta vazia...posso chamar a função isEmpty() mas o livro adota assim
+            this.root = k;
         }
-        else if(z.getInfo().compareTo(y.getInfo()) < 0){
-            y.setLeft(z);
+        else if(k.getInfo().compareTo(p.getInfo()) < 0){
+            p.setLeft(k);
         }
         else{
-            y.setRight(z);
+            p.setRight(k);
         }
-        z.setLeft(tnil);
-        z.setRight(tnil);
-        z.setColor(1); // novo nó começa com vermelho
-        CorrigeInsert(z); // corrige qualquer violação das propriedades vermelho-preto
+        k.setLeft(tnil);
+        k.setRight(tnil);
+        k.setColor(1); // novo nó começa com vermelho
+        CorrigeInsert(k); // corrige qualquer violação das propriedades vermelho-preto
     }
 
     private void passeioEmOrdem(RBNode<T> r) {
