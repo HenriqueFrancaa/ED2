@@ -164,16 +164,17 @@ public class RB<T extends Comparable<T>>{
         CorrigeInsert(k); // corrige qualquer violação das propriedades vermelho-preto
     }
 
-    private void passeioEmOrdem(RBNode<T> r) {
+    private void passeioEmOrdem(RBNode<T> r) { //passeio em Ordem de forma recursiva
         if (r != tnil) {
             passeioEmOrdem(r.getLeft());
-            if(r.getStatus() == 1){
 
-                if(r.getColor() == 1){
-                    System.out.print("\u001B[31m" + "[ " + r.getInfo() + " , " + " V ]" + "\u001B[0m" + ' ');
+            if(r.getStatus() == 1){ // verificando se o nó está ativado
+
+                if(r.getColor() == 1){ //verificando se o nó é vermelho
+                    System.out.print("[ " + r.getInfo() + " , " + " V ] ");
                 }
-                else{
-                    System.out.print("\u001B[30m" + "[ " + r.getInfo() + " , " + "P ]" + "\u001B[0m" + ' ');
+                else{ // nó é preto
+                    System.out.print("[ " + r.getInfo() + " , " + "P ] ");
                 }
             }
             passeioEmOrdem(r.getRight());
@@ -211,13 +212,13 @@ public class RB<T extends Comparable<T>>{
                     fila.enQueue(tnil);
                 }
                 if (aux == tnil) {
-                    System.out.print("\u001B[30m" + "[ null , P ] " + "\u001B[0m" + ' ' );
+                    System.out.print("[ null , P ] ");
                 } else {
                     if (aux.getColor() == 1) {
-                        System.out.print("\u001B[31m" + "[ " + aux.getInfo() + " , " + " V ]" + "\u001B[0m" + ' ');
+                        System.out.print("[ " + aux.getInfo() + " , " + " V ] ");
                     }
                     else{
-                        System.out.print("\u001B[30m" + "[ " + aux.getInfo() + " , " + "P ]" + "\u001B[0m" + ' ');
+                        System.out.print("[ " + aux.getInfo() + " , " + "P ] ");
                     }
                 }
             }
@@ -235,7 +236,7 @@ public class RB<T extends Comparable<T>>{
         }
     }
 
-    private void removerNode(T value){
+    private void removerNodePreguicoso(T value){ // método de remoção preguiçosa
         RBNode<T>aux = this.root;
         int result;
         while (aux != tnil) { 
@@ -264,7 +265,7 @@ public class RB<T extends Comparable<T>>{
             System.out.println("Árvore vázia!");
         }
         else{
-            removerNode(value);
+            removerNodePreguicoso(value);
         }
 
     }
