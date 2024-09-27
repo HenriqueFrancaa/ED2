@@ -7,7 +7,8 @@ public class RB<T extends Comparable<T>>{
     private RBNode<T> tnil;
 
     public RB(){
-        tnil = new RBNode<T>(); //nó de null com os atributos de um nó normal, folha da cor PRETA
+        tnil = new RBNode<T>(); //nó de null com os atributos de um nó normal,
+                                // folha da cor PRETA
         root = tnil;
     }
 
@@ -24,7 +25,8 @@ public class RB<T extends Comparable<T>>{
         RBNode<T> b;
         b = a.getRight(); //filho a direita do nó A
         
-        a.setRight(b.getLeft()); //transforma a subárvore à esquerda de B na subárvore à direita de A;
+        a.setRight(b.getLeft()); //transforma a subárvore à esquerda de B
+                                // na subárvore à direita de A;
 
         if(b.getLeft() != tnil){ //verificando se B tem filho da esquerda, 
             b.getLeft().setPai(a); //atualizando o pai do filho à esquerda de B para A;
@@ -50,7 +52,8 @@ public class RB<T extends Comparable<T>>{
         RBNode<T> b;
         b = a.getLeft(); // filho à esq de A
         
-        a.setLeft(b.getRight()); //transforma a subárvore à dir de B na subárvore à esq de A;
+        a.setLeft(b.getRight()); //transforma a subárvore à dir de B
+                                // na subárvore à esq de A;
         if(b.getRight() != tnil){// verificando se B tem filho da dir
             b.getRight().setPai(a);// atualizando o pai do filho à dir de B para A
         }
@@ -90,7 +93,8 @@ public class RB<T extends Comparable<T>>{
                 else { //tio.cor != vermelho -> rotação
                     if(k == p.getRight()){
                         k = k.getPai(); //R.D.D
-                                        //como sabemos que P já é filho da esquerda, se K for filho da direita de P
+                                        //como sabemos que P já é filho da esquerda, se K for 
+                                        // filho da direita de P
                                         //vamos ter que realizar uma rotação dupla pra dir
                         leftRotate(k); //R.S.E e depois R.S.D
                     }
@@ -114,8 +118,8 @@ public class RB<T extends Comparable<T>>{
                 }
                 else{
                     if(k == p.getLeft()){ //P é filho da dir e se K for filho da esq de P
-                        k = k.getPai();     //fazer uma R.D.E
-                        rightRotate(k);     //fazendo um R.S.D e depois uma R.S.E
+                        k = k.getPai();  //fazer uma R.D.E
+                        rightRotate(k);  //fazendo um R.S.D e depois uma R.S.E
                     }
                     //atualizando o novo p e G pelo novo K;
                     p = k.getPai();
@@ -171,10 +175,10 @@ public class RB<T extends Comparable<T>>{
             if(r.getStatus() == 1){ // verificando se o nó está ativado
 
                 if(r.getColor() == 1){ //verificando se o nó é vermelho
-                    System.out.print("[ " + r.getInfo() + " , " + " V ] ");
+                    System.out.print("\u001B[31m" + "[ " + r.getInfo() + " , " + " V ]" + "\u001B[0m" + ' ');
                 }
                 else{ // nó é preto
-                    System.out.print("[ " + r.getInfo() + " , " + "P ] ");
+                    System.out.print("\u001B[30m" + "[ " + r.getInfo() + " , " + "P ]" + "\u001B[0m" + ' ');
                 }
             }
             passeioEmOrdem(r.getRight());
@@ -216,13 +220,13 @@ public class RB<T extends Comparable<T>>{
                                         // adicionamos o tnil na fila
                 }
                 if (aux == tnil) {
-                    System.out.print("[ null , P ] "); //se o nó for tnil, imprimos null
+                    System.out.print("\u001B[30m"+"[ null , P ] " + "\u001B[0m"); //se o nó for tnil, imprimos null
                 } else {
                     if (aux.getColor() == 1) {
-                        System.out.print("[ " + aux.getInfo() + " , " + " V ] ");//impressao do info e da cor
+                        System.out.print("\u001B[31m" + "[ " + aux.getInfo() + " , " + " V ]" + "\u001B[0m" + ' ');//impressao do info e da cor
                     }
                     else{
-                        System.out.print("[ " + aux.getInfo() + " , " + "P ] ");
+                        System.out.print("\u001B[30m" + "[ " + aux.getInfo() + " , " + "P ]" + "\u001B[0m" + ' ');
                     }
                 }
             }

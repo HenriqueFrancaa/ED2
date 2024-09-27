@@ -8,7 +8,7 @@ class RBNode<T extends Comparable<T>>{
     private int status; // 1 - ativo , 0 inativo
     private int color; // 1 - vermelho , 0 - preto
 
-    RBNode(){
+    RBNode(){ // construtor de tnil
         this.color = 0;
         this.status = 1;
         this.left = this;
@@ -16,7 +16,7 @@ class RBNode<T extends Comparable<T>>{
         this.pai = this;
     }
 
-    RBNode(T value){
+    RBNode(T value){ //construtor de nó
         this.info = value;
         this.color = 0;
         this.left = null;
