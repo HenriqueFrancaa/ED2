@@ -12,10 +12,12 @@ public class App {
             op = scan.nextInt();
             switch (op) {
                 case 1: // cadastrar um novo produto
+                    System.out.println("Insira um valor: ");
                     num = scan.nextInt();
                     arv.insert(num);
                     break;
                 case 2:// remover um valor
+                    System.out.println("Insira o valor do nó removido!");
                     num = scan.nextInt();
                     arv.remover(num);
                     break;
@@ -42,6 +44,7 @@ public class App {
         System.out.println("2. Remover um valor\n3. Passeio por nível");
         System.out.println("4. Passeio em Ordem");
         System.out.println("0. Encerrar o programa");
+        System.out.println("==========================================");
         }
 
 }

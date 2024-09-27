@@ -1,3 +1,4 @@
+package TESTE;
 import RedBlackTree.RB;
 
 public class Teste {

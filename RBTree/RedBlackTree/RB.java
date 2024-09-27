@@ -97,8 +97,8 @@ public class RB<T extends Comparable<T>>{
                     //atualizando o P e o G pelo novo K;
                     p = k.getPai(); 
                     g = p.getPai();
-                    p.setColor(0);
-                    g.setColor(1);
+                    p.setColor(0); // p fica preto
+                    g.setColor(1);// g fica vermelho
                     rightRotate(g); //R.S.D
                 }
             }
@@ -194,28 +194,32 @@ public class RB<T extends Comparable<T>>{
     private void passeioPorNivel() {
         Queue<RBNode<T>> fila;
         RBNode<T> aux;
+        //Vamos utilizar a Queue para auxiliar no passeioPorNivel, modificando somente quando o nó só tiver um filho, 
+        //irá imprimir null no filho que estiver faltando!
         if (this.isEmpty() == false) {
             fila = new Queue<RBNode<T>>();
-            fila.enQueue(root);
+            fila.enQueue(root); //colocamos na fila a raiz;
             while (fila.isEmpty() == false) {
                 aux = fila.deQueue();
                 if (aux.getLeft() != tnil) {
-                    fila.enQueue(aux.getLeft());
+                    fila.enQueue(aux.getLeft()); // adicionamos o nó da esquerda na fila
                 }
                 if(aux.getRight() != tnil && aux.getLeft() == tnil){
-                    fila.enQueue(tnil);
+                    fila.enQueue(tnil); //caso nó tenha filho da dir mas não o da esq, adicionamos na fila tnil
+                                        // para conseguirmos fazer a impressao do null
                 }
-                if(aux.getRight() != tnil){
-                    fila.enQueue(aux.getRight());
+                if(aux.getRight() != tnil){ 
+                    fila.enQueue(aux.getRight()); // adicionamos o nó da direita na fila
                 }
                 if(aux.getLeft() != tnil && aux.getRight() == tnil){
-                    fila.enQueue(tnil);
+                    fila.enQueue(tnil);//caso o nó tenha o filho da esq mas não o da dir
+                                        // adicionamos o tnil na fila
                 }
                 if (aux == tnil) {
-                    System.out.print("[ null , P ] ");
+                    System.out.print("[ null , P ] "); //se o nó for tnil, imprimos null
                 } else {
                     if (aux.getColor() == 1) {
-                        System.out.print("[ " + aux.getInfo() + " , " + " V ] ");
+                        System.out.print("[ " + aux.getInfo() + " , " + " V ] ");//impressao do info e da cor
                     }
                     else{
                         System.out.print("[ " + aux.getInfo() + " , " + "P ] ");
@@ -232,22 +236,24 @@ public class RB<T extends Comparable<T>>{
             System.out.println("Árvore está vazia");
         }
         else{
-            this.passeioPorNivel();
+            this.passeioPorNivel(); //chama metodo de passeio Por Nivel
         }
     }
 
     private void removerNodePreguicoso(T value){ // método de remoção preguiçosa
         RBNode<T>aux = this.root;
-        int result;
-        while (aux != tnil) { 
+        int result; 
+        while (aux != tnil) {  // fazendo a procura do nó que vai ser removido, mas só vamos alterar o status dele para 0;
+                                // dizendo que o nó vai estar inativo
             result = value.compareTo(aux.getInfo());
-            if(result == 0){
+            if(result == 0){ 
                 if(aux.getStatus() == 1){
-                    aux.setStatus(0);
+                    aux.setStatus(0); // mudando status para inativo
                     System.out.println("Removido!");
+                    
                 }
                 else{
-                    System.out.println("Este valor já foi removido!");
+                    System.out.println("Este valor já foi removido!");  // caso o nó já esteja inativo
                 }
                 return;
             }
@@ -258,14 +264,17 @@ public class RB<T extends Comparable<T>>{
                 aux = aux.getRight();
             }
         }
+        if(aux == tnil){
+            System.out.println("Nó não encontrado");
+        }
     }
 
     public void remover(T value){
-        if(this.root == tnil){
+        if(this.root == tnil){ 
             System.out.println("Árvore vázia!");
         }
         else{
-            removerNodePreguicoso(value);
+            removerNodePreguicoso(value); //chama metodo de remoção preguiçosa
         }
 
     }
