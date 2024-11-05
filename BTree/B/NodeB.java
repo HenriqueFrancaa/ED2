@@ -1,7 +1,6 @@
 package B;
 
-
-public class NodeB {
+class NodeB {
 
     private int n;
     private int[] infos;
