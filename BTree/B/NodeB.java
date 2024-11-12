@@ -4,11 +4,13 @@ class NodeB {
 
     private int n;
     private int[] infos;
-    private NodeB[]filhos;
+    private NodeB[] filhos;
+    private boolean folha;
 
     NodeB(int m){
         this.infos = new int[m];
         this.filhos = new NodeB[m];
+        this.folha = true;
     }
 
     int getN(){
@@ -31,6 +33,14 @@ class NodeB {
     }
     void setFilho(int pos, NodeB filho){
         this.filhos[pos] = filho; 
+    }
+
+    boolean getFolha(){
+        return this.folha;
+    }
+
+    void setFolha(){
+        this.folha = false;
     }
 
 }
