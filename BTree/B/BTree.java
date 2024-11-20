@@ -42,4 +42,33 @@ public class BTree{
         }
     }
 
+    private Retorno ProcuraMaior(){
+        NodeB pai = null;
+        NodeB filho = this.root;
+
+        while( filho != null ){
+            pai = filho;
+            if(!filho.getFolha()){
+                filho = filho.getFilho(filho.getN());
+            }
+            else{
+                filho = filho.getFilho(filho.getN()-1);
+            }
+        }
+        Retorno node = new Retorno(pai.getN()-1,pai);
+        
+        return node;
+    }
+
+    public void acharMaior(){
+        if(this.isEmpty()){
+            System.out.println("Árvore vázia!");
+        }
+        else{
+            Retorno node = ProcuraMaior();
+            System.out.println("Maior valor ");
+        }
+    }
+
+
 }
