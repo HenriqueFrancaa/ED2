@@ -8,11 +8,14 @@ public class App{
         x = scan.nextInt();
         System.out.println("-----ordem (c)rescente ou (d)ecrescente? -----");
         ordem = scan.next().charAt(0);
+        /*
+        */
+        Integer v[] = new Integer[x];
 
-        String v[] = new String[x];
+
 
         for(int i = 0; i < x; i++){
-            v[i] = scan.nextLine();
+            v[i] = scan.nextInt();
         }
         
         System.out.println("Vetor Desordenado!");
@@ -21,8 +24,8 @@ public class App{
         }
         
 
-
         Quicksort ordenado = new Quicksort(ordem);
+
         ordenado.quicksort(v,0, v.length-1);
         
         System.out.println("\nVetor Ordenado!");
@@ -30,17 +33,32 @@ public class App{
             System.out.print(v[i] + " ");
         }
         /*
+        */
+
         Aluno alunos[] = new Aluno[x];
+        System.out.println();
 
         for(int i = 0; i < x; i++){
+            scan.nextLine();
             String matricula = scan.nextLine();
+           // scan.nextLine();
             String nome = scan.nextLine();
+            //scan.nextLine();
             Double nota = scan.nextDouble();
+            //scan.nextLine();
             int faltas = scan.nextInt();
             alunos[i]= new Aluno(matricula,nome,nota,faltas);
         }
-        */
+        
+        for (int i = 0; i < alunos.length; i++) {
+            System.out.println(alunos[i].getNome() + "-> nota: " + alunos[i].getNota());
+        }
 
+        ordenado.quicksort(alunos, 0, alunos.length-1);
+        System.out.println();
+        for (int i = 0; i < alunos.length; i++) {
+            System.out.println(alunos[i].getNome() + "-> nota: " + alunos[i].getNota());
+        }
 
 
     }

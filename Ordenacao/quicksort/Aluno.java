@@ -1,14 +1,18 @@
-public class Aluno{
+public class Aluno implements Comparable <Aluno>{
     private String matr;
     private String nome;
-    private double nota;
+    private Double nota;
     private int faltas;
 
-    public Aluno(String matr, String nome, double nota, int faltas) {
+    public Aluno(String matr, String nome, Double nota, int faltas) {
         this.matr = matr;
         this.nome = nome;
         this.nota = nota;
         this.faltas = faltas;
+    }
+    @Override
+    public int compareTo(Aluno aluno){
+        return (this.getNota()).compareTo(aluno.getNota());
     }
 
     void setMatr(String matr){
@@ -17,7 +21,7 @@ public class Aluno{
     void setNome(String nome){
         this.nome = nome;
     }
-    void setNota(double nota){
+    void setNota(Double nota){
         this.nota = nota;
     }
     void setFaltas(int faltas){
@@ -31,7 +35,7 @@ public class Aluno{
     String getNome(){
         return this.nome;
     }
-    double getNota(){
+    Double getNota(){
         return this.nota;
     }
     int getFaltas(){

@@ -71,14 +71,5 @@ public class Quicksort {
             quicksort(v, k + 1, f);
         }
     }
-    /*
-    public <T extends Comparable<T>> void quicksortAluno(T v[], int i, int f) {
-        int k;
-        if (f > i) {
-            k = particaoAluno(v, i, f);
-            quicksortAluno(v, i, k - 1);
-            quicksortAluno(v, k + 1, f);
-        }
-    }
-    */
+   
 }
