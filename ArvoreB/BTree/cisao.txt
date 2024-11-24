@@ -1,0 +1,77 @@
+private void cisao(NodeB<T> pai, int i ,NodeB<T> filho) {
+        NodeB<T> novoFilho = new NodeB<>(ordem); // node novo com as maiores chaves
+       
+        for (int j = pai.getN(); j > i; j--) {
+            pai.setFilho(pai.getFilho(j), j + 1);
+        }
+ 
+        pai.setFilho(novoFilho, i + 1);
+       
+        for (int j = pai.getN() - 1; j >= i; j--) { //atualizando as chaves que tiver 
+            pai.setChv(pai.getChv(j), j + 1);
+        }
+ 
+        pai.setChv(filho.getChv(minimo), i);
+        pai.setN(pai.getN() + 1);
+        filho.setN(filho.getN() - 1);
+        filho.setChv(null, minimo);
+       
+ 
+       
+        for (int j = 0; j < minimo; j++) {
+            novoFilho.setChv(filho.getChv(j + minimo + 1), j);
+            filho.setChv(null, j + minimo + 1);
+ 
+        }
+ 
+        if (filho.getFilho(0) != null) {
+            for (int j = 0; j < minimo + 1 ; j++) {
+                novoFilho.setFilho(filho.getFilho( j+ minimo + 1), j);
+                filho.setFilho(null, j + minimo + 1);
+            }
+        }
+ 
+        filho.setN(minimo);
+        novoFilho.setN(minimo);
+       
+}
+
+
+public void passeioNivel() {
+        if (raiz == null) {
+            System.out.println("A árvore está vazia!");
+        } else {
+            passeioPorNivel(raiz);
+        }
+    }
+    
+private void passeioPorNivel(NodeB<T> r) {
+    if (r == null) return;
+
+    Queue<NodeB<T>> fila = new LinkedList<>();
+    fila.add(r);
+    fila.add(null);
+
+    while (!fila.isEmpty()) {
+        NodeB<T> atual = fila.poll();
+
+        if (atual == null) {
+            System.out.println();
+            if (!fila.isEmpty()) {
+                fila.add(null);
+            }
+        } else {
+            for (int j = 0; j < atual.getN(); j++) {
+                System.out.print(atual.getChv(j) + " ");
+            }
+            System.out.print("| ");
+
+            for (int i = 0; i <= atual.getN(); i++) {
+                NodeB<T> filho = atual.getPont(i);
+                if (filho != null) {
+                    fila.add(filho);
+                }
+            }
+        }
+    }
+}
