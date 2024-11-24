@@ -1,4 +1,3 @@
-package  B;
 
 public class BTree{
     private NodeB root;
@@ -13,7 +12,7 @@ public class BTree{
         NodeB y = x.getFilho(i);
         z.setFolha(y.getFolha());
 
-        for(int j = 0; j < (m/2)-1; j++){
+        for(int j = 0; j < (m/2); j++){ //passando as maiores chaves para Z
             z.setInfo(j, y.getInfo(j+(m/2)));
         }
         if(!y.getFolha()){
@@ -23,24 +22,24 @@ public class BTree{
         }
         y.setN(m/2);
 
-        for(int j = x.getN()+1; j >= i+1; j--){
+        for(int j = x.getN()+1; j >= i+1; j--){ //achar a posicao do ponteiro certo
             x.setFilho(j+1, x.getFilho(j));
         }
 
         x.setFilho(i+1, z);
 
-        for(int j = x.getN(); j >= i; i--){
+        for(int j = x.getN(); j >= i; j--){
             x.setInfo(j+1, x.getInfo(j));
         }
 
-        x.setInfo(i, y.getInfo(m/2));
+        x.setInfo(i, y.getInfo((m/2)-1));
         x.setN(x.getN()+1);
 
     }
 
-    private void insertNonFull(NodeB x, Integer k){
+    private void insertNonFull(NodeB x, int k){
         
-        int i = x.getN()-1;
+        int i = x.getN();
         if(x.getFolha()){
             while(i >= 0 && k < x.getInfo(i)){
                 x.setInfo(i+1, x.getInfo(i));
@@ -50,7 +49,7 @@ public class BTree{
             x.setN(x.getN()+1);
         }
         else{
-            while(i >= 0 && k < x.getInfo(i)){
+            while(i >= 0 && (k < x.getInfo(i) || x.getInfo(i) == 0)){
                 i--;
             }
             if(x.getFilho(i).getN() == m-1){
@@ -64,7 +63,7 @@ public class BTree{
     }
 
 
-    public void insert(Integer k){
+    public void insert(int k){
         
         if(this.isEmpty()){
             NodeB novo = new NodeB(m);
@@ -145,7 +144,7 @@ public class BTree{
         }
         else{
             Retorno node = procuraMaior();
-            System.out.println("Maior valor ");
+            System.out.println("Maior valor " + node.getNode().getInfo(node.getPos()));
         }
     }
 

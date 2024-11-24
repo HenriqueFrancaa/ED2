@@ -1,4 +1,3 @@
-package B;
 
 class Retorno {
     

@@ -1,14 +1,13 @@
-package B;
 
 class NodeB {
 
     private int n;
-    private Integer[] infos;
+    private int[] infos;
     private NodeB[] filhos;
     private boolean folha;
 
     NodeB(int m){
-        this.infos = new Integer[m];
+        this.infos = new int[m];
         this.filhos = new NodeB[m];
         this.folha = true;
         this.n = 0;
@@ -29,7 +28,7 @@ class NodeB {
         return this.filhos[pos];
     }
     
-    void setInfo(int pos, Integer val){
+    void setInfo(int pos, int val){
         this.infos[pos] = val;
     }
     void setFilho(int pos, NodeB filho){
