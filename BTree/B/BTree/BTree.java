@@ -156,6 +156,37 @@ public class BTree<T extends Comparable<T>> {
         }
     }
     
+
+    private Retorno search(BNode<T> r,T k){
+        int i = 0;
+        while (i < r.getN() && (k.compareTo(r.getInfo(i)) > 0)) {
+            i++;
+        }
+        if (i < r.getN() && (k.compareTo(r.getInfo(i)) == 0)) {
+            Retorno node = new Retorno(i, r);
+            return node;
+        } else if (r.getFolha()) {
+            return null;
+        }
+        return search(r.getFilho(i),k);
+    }
+
+    public void searchKey(T k){
+        if(this.isEmpty()){
+            System.out.println("Árvore vázia!");
+        }
+        else{
+            Retorno node = search(root,k);
+            if(node == null){
+                System.out.println("Valor não encontrado!");
+            }
+            else{
+                System.out.println("Valor " + node.getNode().getInfo(node.getPos()) + " na posição " + node.getPos());
+            }
+        }
+    }
+
+
     private void level(BNode<T> r) {
         
         Queue<BNode<T>> fila = new LinkedList<>();

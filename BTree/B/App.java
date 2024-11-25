@@ -10,5 +10,6 @@ public class App {
         arv.levelTour();
         arv.biggestKey();
         arv.smallestKey();
+        arv.searchKey(900);
     }
 }
