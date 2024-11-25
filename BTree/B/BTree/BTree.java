@@ -124,6 +124,17 @@ public class BTree<T extends Comparable<T>> {
         return node;
     }
 
+    private Retorno foundSmallestKey(){
+        BNode<T> pai = null;
+        BNode<T> filho = this.root;
+        while(filho != null){
+            pai = filho;
+            filho = filho.getFilho(0);
+        }
+        Retorno node = new Retorno(0, pai);
+        return node;
+    }
+
     public void biggestKey(){
         if(this.isEmpty()){
             System.out.println("Árvore vázia!");
@@ -131,6 +142,17 @@ public class BTree<T extends Comparable<T>> {
         else{
             Retorno node = foundBiggestKey();
             System.out.println("Maior valor: " + node.getNode().getInfo(node.getPos()) + " na posição " + node.getPos());
+        }
+    }
+
+    public void smallestKey(){
+        if(this.isEmpty()){
+            System.out.println("Árvore vázia!");
+        }
+        else{
+            Retorno node = foundSmallestKey();
+            System.out.println("Menor valor: " + node.getNode().getInfo(node.getPos()) + " na posição " + node.getPos());
+
         }
     }
     
