@@ -15,7 +15,7 @@ public class BTree<T extends Comparable<T>> {
     public boolean isEmpty() {
         return this.root == null;
     }
-
+    // INSERT ZONE
     private void split(BNode<T> pai, int i) {
         BNode<T> novo = new BNode<T>(m);
         BNode<T> filho = pai.getFilho(i);
@@ -107,6 +107,7 @@ public class BTree<T extends Comparable<T>> {
         }
 
     }
+    // END INSERT ZONE
 
     private Retorno foundBiggestKey(){
         BNode<T> pai = null;
@@ -184,6 +185,16 @@ public class BTree<T extends Comparable<T>> {
                 System.out.println("Valor " + node.getNode().getInfo(node.getPos()) + " na posição " + node.getPos());
             }
         }
+    }
+
+    public void height(){
+        BNode<T>r = root;
+        int cont = 0;
+        while( !r.getFolha()){
+            r = r.getFilho(0);
+            cont++;
+        }
+        System.out.println("Altura da árvore: " + cont);
     }
 
 

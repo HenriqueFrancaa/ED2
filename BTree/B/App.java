@@ -11,5 +11,6 @@ public class App {
         arv.biggestKey();
         arv.smallestKey();
         arv.searchKey(900);
+        arv.height();
     }
 }
