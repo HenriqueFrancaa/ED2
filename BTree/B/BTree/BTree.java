@@ -20,6 +20,8 @@ public class BTree<T extends Comparable<T>> {
         BNode<T> novo = new BNode<T>(m);
         BNode<T> filho = pai.getFilho(i);
 
+        novo.setFolha(filho.getFolha());
+
         for (int j = pai.getN(); j > i; j--) {
             pai.setFilho(j + 1, pai.getFilho(j));
         }
@@ -40,7 +42,7 @@ public class BTree<T extends Comparable<T>> {
         }
 
         if (!filho.getFolha()) {
-            for (int j = 0; j < m / 2; j++) {
+            for (int j = 0; j < m / 2 + 1; j++) {
                 novo.setFilho(j, filho.getFilho(j + m / 2 + 1));
                 filho.setFilho(j + m / 2 + 1, null);
             }
@@ -67,12 +69,13 @@ public class BTree<T extends Comparable<T>> {
             i++;
             insertNonFull(x.getFilho(i), k);
 
+            
             if (x.getFilho(i).getN() == m) { // o no encheu
                 split(x, i);
                 /*
                 */
                 if (x == root && x.getN() == m) {
-                    BNode<T> s = new BNode<T>(m);
+                BNode<T> s = new BNode<T>(m);
                     s.setFilho(0, x);
                     s.setFolha(false);
                     x.setPai(s);
@@ -80,7 +83,6 @@ public class BTree<T extends Comparable<T>> {
                     split(s, 0);
                 }
             }
-
         }
     }
 

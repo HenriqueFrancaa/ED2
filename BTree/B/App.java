@@ -3,7 +3,7 @@ import BTree.BTree;
 public class App {
     public static void main(String[] args) {
         BTree<Integer> arv = new BTree<Integer>();
-        int x[] = { 12, 27, 54, 86, 33, 41, 67, 72, 94, 29, 23, 38, 59, 107, 61, 32, 131 };
+        int x[] = { 110,100,90,80,60,50,40,130,120,70,150,30,200,280,500,170,105,75,190,145};
         for (int i = 0; i < x.length; i++) {
             arv.insert(x[i]);
         }

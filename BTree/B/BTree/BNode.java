@@ -10,7 +10,7 @@ class BNode<T extends Comparable<T>> {
     BNode(int m) {
         this.pai = null;
         this.infos = (T[]) new Comparable[m];
-        this.filhos = new BNode[m];
+        this.filhos = new BNode[m+1];
         this.folha = true;
         this.n = 0;
     }
