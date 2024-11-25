@@ -12,5 +12,6 @@ public class App {
         arv.smallestKey();
         arv.searchKey(900);
         arv.height();
+        arv.preOrdemTour();
     }
 }

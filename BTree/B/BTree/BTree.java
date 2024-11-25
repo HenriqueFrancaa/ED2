@@ -234,4 +234,24 @@ public class BTree<T extends Comparable<T>> {
         } else
             level(root);
     }
+
+    private void preOrdem(BNode<T> r){
+        if(r != null){
+            for(int i = 0; i < r.getN(); i++){
+                System.out.print(r.getInfo(i) + " ");
+            }
+            System.out.print("| ");
+            for(int i = 0; i <= r.getN(); i++){
+                preOrdem(r.getFilho(i));
+            }
+        }
+    }
+
+    public void preOrdemTour(){
+        if(this.isEmpty()){
+            System.out.println("Árvore vázia!");
+        }
+        else preOrdem(root);
+        System.out.println();
+    }
 }
