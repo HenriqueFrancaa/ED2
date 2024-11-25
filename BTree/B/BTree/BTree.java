@@ -108,15 +108,34 @@ public class BTree<T extends Comparable<T>> {
 
     }
 
-    public void levelTour() {
-        if (this.isEmpty()) {
-            System.out.println("Árvore vázia!");
-        } else
-            level(root);
+    private Retorno foundBiggestKey(){
+        BNode<T> pai = null;
+        BNode<T> filho = this.root;
+        while (filho != null) {
+            pai = filho;
+            if (!filho.getFolha()) {
+                filho = filho.getFilho(filho.getN());
+            } else {
+                filho = filho.getFilho(filho.getN() - 1);
+            }
+        }
+        Retorno node = new Retorno(pai.getN() - 1, pai);
+
+        return node;
     }
 
+    public void biggestKey(){
+        if(this.isEmpty()){
+            System.out.println("Árvore vázia!");
+        }
+        else{
+            Retorno node = foundBiggestKey();
+            System.out.println("Maior valor: " + node.getNode().getInfo(node.getPos()) + " na posição " + node.getPos());
+        }
+    }
+    
     private void level(BNode<T> r) {
-
+        
         Queue<BNode<T>> fila = new LinkedList<>();
         fila.add(r);
         fila.add(null);
@@ -143,5 +162,12 @@ public class BTree<T extends Comparable<T>> {
             }
         }
 
+    }
+
+    public void levelTour() {
+        if (this.isEmpty()) {
+            System.out.println("Árvore vázia!");
+        } else
+            level(root);
     }
 }
