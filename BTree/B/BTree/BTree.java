@@ -109,6 +109,27 @@ public class BTree<T extends Comparable<T>> {
     }
     // END INSERT ZONE
 
+    // REMOVE 
+    public void remove(T k){
+        if(this.isEmpty()){
+            System.out.println("Árvore vázia!");
+        }
+        else{
+            Retorno aux = search(root, k); // procurar o nó que contém a chave removida
+            BNode<T> node = aux.getNode(); // pegando o nó
+            if(node.getFolha()){ // verificando se ele é folha
+                int i = aux.getPos();
+                while(i < node.getN()-1){
+                    node.setInfo(i, node.getInfo(i+1));
+                    i++;
+                }
+                node.setN(node.getN()-1);
+            }
+            
+        }
+    }
+
+
     private Retorno foundBiggestKey(){
         BNode<T> pai = null;
         BNode<T> filho = this.root;

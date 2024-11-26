@@ -8,10 +8,15 @@ public class App {
             arv.insert(x[i]);
         }
         arv.levelTour();
+        /*
         arv.biggestKey();
         arv.smallestKey();
+         
         arv.searchKey(900);
         arv.height();
         arv.preOrdemTour();
+        */
+        arv.remove(500);
+        arv.levelTour();
     }
 }
