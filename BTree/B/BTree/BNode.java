@@ -5,14 +5,14 @@ class BNode<T extends Comparable<T>> {
     private T[] infos; // chaves
     private BNode<T>[] filhos; // filhos
     private boolean folha; // folha
-    private int n;
+    private int n; // chaves ativas
 
     BNode(int m) {
-        this.pai = null;
+        this.pai = null; // pai para null
         this.infos = (T[]) new Comparable[m];
         this.filhos = new BNode[m+1];
-        this.folha = true;
-        this.n = 0;
+        this.folha = true; // automaticamente folha
+        this.n = 0; //sem infos
     }
 
     void setPai(BNode<T> pai) {
